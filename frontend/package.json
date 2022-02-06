@@ -39,5 +39,6 @@
     "logger": "^0.0.1",
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
