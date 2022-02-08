@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     scopes: {
       currentUser: {
         attributes: {
-          excludw: ['hashedPassword']
+          exclude: ['hashedPassword']
         }
       },
       loginUser: {
@@ -49,6 +49,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.associate = function(models) {
     // associations can be defined here
+    User.hasMany(models.Notebook, {foreignKey: "user_id"})
+    User.hasMany(models.Note, {foreignKey: "user_id"})
   };
 
   User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
