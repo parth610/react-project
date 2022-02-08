@@ -1,0 +1,44 @@
+.navigation-bar {
+    margin-top: 1.5%;
+    height: fit-content;
+    background-color: white;
+    font-family: poppins;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo-container {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+}
+
+.login-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.helper-note-logo {
+    width: 250px
+}
+
+#login-button, #signup-button {
+    padding: 8px 5px;
+    margin: 5px 5px;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    font-weight: 400;
+}
+
+.demo-user-button {
+     border: solid 2px #00A82D;
+     padding: 8px 10px;
+     margin: 5px 8px;
+     text-decoration: none;
+     color: #00A82D;
+     border-radius: 5px;
+}
