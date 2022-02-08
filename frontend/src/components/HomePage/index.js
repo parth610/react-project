@@ -26,7 +26,7 @@ function HomePage () {
                 <div className="info">
                     <img className="info-icons" src={`${reloadImg}`} alt='reload-icon'/>
                     <h2>Take it anywhere</h2>
-                    <p>Sync your notes to all your devices so they stay with you, even if you’re offline.</p>
+                    <p>Login on any device and get your notes accessible anytime.</p>
                 </div>
             </div>
         </div>

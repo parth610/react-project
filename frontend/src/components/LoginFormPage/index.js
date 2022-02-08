@@ -3,6 +3,8 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './LoginForm.css';
+import loginLogo from './images/Asset 3.png';
+import { NavLink } from 'react-router-dom';
 
 function LoginFormPage() {
     const dispatch = useDispatch();
@@ -26,30 +28,41 @@ function LoginFormPage() {
     }
 
     return (
-      <form onSubmit={handleSubmit}>
-        <ul>
+      <div className='login-full-page'>
+      <div className='login-form-container'>
+        <NavLink className='heler-notes-logo-login' exact to='/'>
+        <img className='helper-logo' src={`${loginLogo}`} alt='helper-note-logo-login-page'/>
+        </NavLink>
+      <form className='login-form' onSubmit={handleSubmit}>
+        <ul className='login-errors-list'>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <label>
+        <label className='login-label'>
           Username or Email
-          <input
+          <input className={errors.length ? 'login-input-error' : 'login-input'}
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
           />
         </label>
-        <label>
+        <label className='login-label'>
           Password
-          <input
+          <input className={errors.length ? 'login-input-error' : 'login-input'}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button className='login-button' type="submit">Log In</button>
       </form>
+      <div className='login-form-bottom'>
+        <div>Don't have an account?</div>
+        <NavLink className='signup-redirect-login-page' to='/signup'>Create account</NavLink>
+      </div>
+      </div>
+      </div>
     );
   }
 
