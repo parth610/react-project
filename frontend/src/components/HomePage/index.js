@@ -9,7 +9,7 @@ import searchImg from './images/search-icon.png';
 function HomePage () {
     return (
         <div className="home-container">
-            <h1 className="home-info-title">Why choose HelperNote?</h1>
+            <h1 className="home-info-title">Why choose HelperNotes?</h1>
             <p>HelperNote gives you everything you need to keep life organized—great note taking, project planning, and easy ways to find what you need, when you need it.</p>
             <NavLink className="get-started-button" to="/signup">Let's get started</NavLink>
             <div className="info-cards">
