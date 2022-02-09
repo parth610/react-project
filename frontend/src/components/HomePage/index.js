@@ -1,12 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import './home-page.css'
 import folderImg from './images/folder_icon.png';
 import reloadImg from './images/reload-icon.png';
 import searchImg from './images/search-icon.png';
+import { useSelector } from "react-redux";
 
 
 function HomePage () {
+    const sessionUser = useSelector(state => state.session.user);
+
+    if (sessionUser) return (
+        <Redirect exact to={`/${sessionUser.id}`}/>
+    )
+
     return (
         <div className="home-container">
             <h1 className="home-info-title">Why choose HelperNotes?</h1>
