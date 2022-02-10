@@ -53,7 +53,7 @@ export const addNotebook = (data) => async (dispatch) => {
             'Content-Type': 'application/json',
           }
     })
-        const newBook = response.json();
+        const newBook = await response.json();
         dispatch(createNotebook(newBook));
         return response;
 }
@@ -74,8 +74,8 @@ const notebookReducer = (state = initialState, action) => {
         }
         case CREATE_NOTEBOOK: {
             const newBooks = {...state,
-                ...action.newBook
             };
+            newBooks[action.payload.id] = action.payload
             return newBooks
         }
         default:
