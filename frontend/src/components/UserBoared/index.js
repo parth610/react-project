@@ -21,8 +21,10 @@ function UserBoared () {
     })
 
     useEffect(() => {
-        dispatch(getNotebooks())
-    }, [dispatch])
+        if (sessionUser) {
+            dispatch(getNotebooks())
+        }
+    }, [dispatch, sessionUser])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/', requireAuth, asyncHandler(async(req, res, next) => {
     const {title} = req.body;
     const newNotebook = await Notebook.create({title, user_id: req.user.dataValues.id})
-    res.json({newNotebook})
+    res.json(newNotebook)
 }))
 
 router.get('/', requireAuth, asyncHandler(async(req, res, next) => {
