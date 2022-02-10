@@ -30,8 +30,7 @@ function UserBoared () {
             title,
             user_id: sessionUser.id
         }
-        const res = await dispatch(addNotebook(payload));
-        // return res.json()
+        return dispatch(addNotebook(payload));
     }
 
     return (

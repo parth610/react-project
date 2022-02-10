@@ -76,9 +76,7 @@ const notebookReducer = (state = initialState, action) => {
             const newBooks = {...state,
                 ...action.newBook
             };
-            // const bookList = newBooks.map(id => {
-            //     return newBooks[id]
-            // })
+            return newBooks
         }
         default:
             return state;
