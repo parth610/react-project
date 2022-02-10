@@ -5,7 +5,7 @@ import notebookReducer from './notebook';
 
 const rootReducer = combineReducers({
    session: sessionReducer,
-  //  notebook: notebookReducer
+   notebook: notebookReducer
 })
 
 let enhancer;

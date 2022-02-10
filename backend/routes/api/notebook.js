@@ -12,4 +12,12 @@ router.post('/', requireAuth, asyncHandler(async(req, res, next) => {
     res.json({newNotebook})
 }))
 
+router.get('/', requireAuth, asyncHandler(async(req, res, next) => {
+    const currUser = req.user.dataValues.id;
+    const notebooks = await Notebook.findAll({
+        where: {user_id: currUser}
+    })
+    return res.json(notebooks)
+}))
+
 module.exports = router;
