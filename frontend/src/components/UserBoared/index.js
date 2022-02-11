@@ -3,12 +3,16 @@ import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from '../Navigation/ProfileButton';
 import {getNotebooks, addNotebook, deleteNotebook, updateNotebookTitle} from '../../store/notebook'
+import {addNote} from '../../store/note'
 
 function UserBoared () {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     const [title, setTitle] = useState('');
+    const [noteTitle, setNoteTitle] = useState('');
+    const [content, setContent] = useState('')
+    const [selectNotebook, setSelectNotebook] = useState(null);
 
     useEffect(() => {
         if (!sessionUser) return (
@@ -61,6 +65,19 @@ function UserBoared () {
         titleDiv.setAttribute('contentEditable', 'true')
     }
 
+    //Note
+    const submitNote = (e) => {
+        e.preventDefault();
+    
+        const data = {
+            noteTitle,
+            user_id: sessionUser.id,
+            content,
+            bookId: selectNotebook
+        }
+        return dispatch(addNote(data))
+    }
+
     return (
         <>
         <h1>welcome user</h1>
@@ -82,6 +99,27 @@ function UserBoared () {
                 <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} />
             </label>
             <button type='submit'>New Notebook</button>
+        </form>
+        <form onSubmit={submitNote}>
+            <label>
+                <select onChange={(e) => setSelectNotebook(e.target.value)}>
+                    <option value=''>-SELECT-</option>
+                    {notebooks.map(book => {
+                        return (
+                            <option value={book.id} key={book.id}>{book.title}</option>
+                        )
+                    })}
+                </select>
+            </label>
+            <label>
+                Title
+                <input type='text' value={noteTitle} onChange={(e) => setNoteTitle(e.target.value)} />
+            </label>
+            <label>
+                Note
+                <textarea type='text' value={content} onChange={(e) => setContent(e.target.value)} />
+            </label>
+            <button type='submit'>New Note</button>
         </form>
         </>
     )
