@@ -20,4 +20,27 @@ router.get('/', requireAuth, asyncHandler(async(req, res, next) => {
     return res.json(notebooks)
 }))
 
+router.delete('/:id', requireAuth, asyncHandler(async(req, res, next) => {
+    const currUser = req.user.dataValues.id;
+    const notebookId = req.params.id;
+    const notebook = await Notebook.findByPk(notebookId);
+    if (notebook && notebook.user_id === currUser) {
+        await notebook.destroy();
+    }
+
+    res.json(notebook)
+}))
+
+router.put('/:id', requireAuth, asyncHandler(async(req, res, next) => {
+    const {title} = req.body;
+    const currUser = req.user.dataValues.id;
+    const id = req.params.id
+    const updateBook = await Notebook.findByPk(id);
+    if (updateBook && updateBook.user_id === currUser) {
+        updateBook.title = title;
+        await updateBook.save();
+    }
+    res.json(updateBook)
+}))
+
 module.exports = router;
