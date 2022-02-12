@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from '../Navigation/ProfileButton';
 import {getNotebooks, addNotebook, deleteNotebook, updateNotebookTitle} from '../../store/notebook'
 import {addNote} from '../../store/note'
+import NotesComponent from './Notes'
 
 function UserBoared () {
     const dispatch = useDispatch();
@@ -50,7 +51,7 @@ function UserBoared () {
     const clickEditHandle = (e) => {
         e.preventDefault();
         const changeTitle = document.getElementById(`book-title-${e.target.id}`)
-        console.log(changeTitle.innerHTML)
+
         const bookData = {
             updatedTitle: changeTitle.innerHTML,
             bookId: e.target.id
@@ -68,7 +69,7 @@ function UserBoared () {
     //Note
     const submitNote = (e) => {
         e.preventDefault();
-    
+
         const data = {
             noteTitle,
             user_id: sessionUser.id,
@@ -121,6 +122,10 @@ function UserBoared () {
             </label>
             <button type='submit'>New Note</button>
         </form>
+
+        <div>
+            <NotesComponent />
+        </div>
         </>
     )
 }
