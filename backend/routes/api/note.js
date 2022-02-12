@@ -7,10 +7,7 @@ const router = express.Router();
 
 router.post('/', requireAuth, asyncHandler(async(req, res, next) => {
     const {title, content, notebook_id} = req.body;
-    console.log(title)
-    console.log(content)
 
-    console.log(req.user.dataValues.id)
     const newNote = await Note.create({title, user_id: req.user.dataValues.id, notebook_id, content })
     res.json(newNote)
 }))
@@ -31,6 +28,19 @@ router.delete('/:id', requireAuth, asyncHandler(async(req, res, next) => {
         await note.destroy();
     }
     res.json(note)
+}))
+
+router.put('/:id', requireAuth, asyncHandler(async(req, res) => {
+    const {title, content} = req.body;
+    const currUser = req.user.dataValues.id;
+    const id = req.params.id;
+    const updateNote = await Note.findByPk(id);
+    if (updateNote && updateNote.user_id === currUser) {
+        updateNote.title = title;
+        updateNote.content = content;
+        await updateNote.save();
+    }
+    res.json(updateNote)
 }))
 
 module.exports = router;
