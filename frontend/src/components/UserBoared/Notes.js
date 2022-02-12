@@ -45,22 +45,30 @@ function NotesComponent () {
         }
     }
 
+    const noteEditClick = async (e) => {
+        const data = e.currentTarget.dataset.note;
+
+        console.log(JSON.parse(data))
+    }
+
     return (
         <>
         <div className='note-cards-container'>
             {allNotes.map(note => {
                 return (
-                <div key={note.id}>
+                    <div key={note.id}>
+                <div data-note={JSON.stringify(note)}  onClick={noteEditClick}>
                     <div>{note.title}</div>
                     <div>{note.content}</div>
-                    <span><button id={note.id} onClick={noteDeleteHandle} >DELETE</button></span>
                 </div>
+                <span ><button id={note.id} onClick={noteDeleteHandle} >DELETE</button></span>
+                    </div>
                 )
             })}
         </div>
         <div>
-            <input onChange={(e) => setNoteTitleUpdate(e.target.value)} value= {note.title}/>
-            <textarea onChange={(e) => setNoteContent(e.target.value)} value={note.content} />
+            <input value={noteTitleUpdate} onChange={updateNoteHandle}/>
+            <textarea value={noteContent} onChange={updateNoteHandle}/>
         </div>
         </>
     )
