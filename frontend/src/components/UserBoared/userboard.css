@@ -365,3 +365,10 @@
     font-size: 12px;
     flex-direction: column;
 }
+
+#notebook-delete-icon {
+    border: none;
+    background-color: none;
+    color: red;
+    font-size: 12px;
+}

@@ -204,7 +204,9 @@ function UserBoared () {
                     {notebooks.map(book => {
                         return (
                             <div key={book.id}>
-                            <div id={`book-title-editable-${book.id}`}><p className='nav-book-list' id={`book-title-${book.id}`}><i id='note-icon' className='fas fa-book'/>{book.title}</p></div>
+                            <div id={`book-title-editable-${book.id}`}><p className='nav-book-list' id={`book-title-${book.id}`}><i id='note-icon' className='fas fa-book'/>{book.title}</p>
+                            <span><button id={`${book.id}`} onClick={clickDeleteHandle}>del</button></span>
+                            </div>
                             </div>
                             )
                          })}
