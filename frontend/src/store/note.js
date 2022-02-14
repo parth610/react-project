@@ -1,9 +1,10 @@
 import { csrfFetch } from "./csrf";
 import { REMOVE_USER } from "./session";
+import { REMOVE_NOTEBOOK } from "./notebook";
 
 const CREATE_NOTE = 'note/createNote';
 const UPDATE_NOTE = 'note/updateNote';
-const REMOVE_NOTE = 'note/removeNote';
+export const REMOVE_NOTE = 'note/removeNote';
 const LOAD_NOTE = 'note/loadNote';
 
 const createNote = (note) => {
@@ -119,6 +120,18 @@ const noteReducer = (state = initialState, action) => {
             const newNote = { ...state };
             newNote[action.note.id] = action.note;
             return newNote;
+        }
+
+        case REMOVE_NOTEBOOK: {
+            const newNotes = {...state}
+            const deletedBook = action.book
+
+            for (let key in newNotes) {
+                if (deletedBook.id === newNotes[key].notebook_id) {
+                    delete newNotes[key]
+                }
+            }
+            return newNotes
         }
 
         case REMOVE_USER: {

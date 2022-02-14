@@ -7,6 +7,8 @@ import HomePage from "./components/HomePage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import UserBoared from "./components/UserBoared";
+import NotebookComponent from "./components/UserBoared/Notebook";
+import NotesComponent from "./components/UserBoared/Notes";
 
 function App() {
 
@@ -22,9 +24,15 @@ function App() {
     sessionRoutes =(
       <>
       <Redirect exact to={`/${sessionUser.id}`} />
-    <Switch>
-      <Route exact path={`/${sessionUser.id}`}>
+      <Route path={`/${sessionUser.id}`}>
         <UserBoared />
+      </Route>
+      <Switch>
+      <Route path='/:id/Notebooks'>
+        <NotebookComponent />
+      </Route>
+      <Route path='/:id/notes'>
+        <NotesComponent />
       </Route>
     </Switch>
       </>

@@ -7,7 +7,7 @@ const noteRouter = require('./note.js')
 const asyncHandler = require('express-async-handler');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth.js');
 const { User } = require('../../db/models');
-console.log('..index..test')
+
 router.use('/session', sessionRouter);
 router.use('/users', userRouter);
 router.use('/note', noteRouter);
