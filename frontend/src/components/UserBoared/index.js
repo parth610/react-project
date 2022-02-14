@@ -14,9 +14,10 @@ function UserBoared () {
     const sessionUser = useSelector(state => state.session.user);
     const [title, setTitle] = useState('');
     const [noteTitle, setNoteTitle] = useState('Untitled');
-    const [content, setContent] = useState('Write your thoughts')
+    const [content, setContent] = useState('')
     const [selectNotebook, setSelectNotebook] = useState(null);
     const [showCreateButtons, setShowCreateButtons] = useState(false)
+    const [noteErrors, setNoteErrors] = useState([]);
 
     const openCreateButtons = () => {
         if (showCreateButtons) return;

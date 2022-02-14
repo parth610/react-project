@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
+import signupLogo from '../LoginFormPage/images/Asset 3.png'
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -29,48 +30,59 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
+    <div className="signup-full-page">
+      <div className="signup-form-container">
+        <NavLink className='helper-notes-logo-signup' exact to='/'>
+          <img className='helper-logo-signup' src={`${signupLogo}`} alt='helper-note-logo-signup-page'/>
+        </NavLink>
+    <form className="singup-form" onSubmit={handleSubmit}>
+      <ul className="signup-errors-list">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <label>
+      <label className='signup-label'>
         Email
-        <input
+        <input  className="signup-input"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
       </label>
-      <label>
+      <label className='signup-label'>
         Username
-        <input
+        <input  className="signup-input"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
       </label>
-      <label>
+      <label className='signup-label'>
         Password
-        <input
+        <input className="signup-input"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
       </label>
-      <label>
+      <label className='signup-label'>
         Confirm Password
-        <input
+        <input  className="signup-input"
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
       </label>
-      <button type="submit">Sign Up</button>
+      <button className="signup-button" type="submit">Sign Up</button>
     </form>
+    <div className='login-form-bottom'>
+        <div>Already have an account?</div>
+        <NavLink className='login-redirect-login-page' to='/login'>Login</NavLink>
+      </div>
+      </div>
+      </div>
   );
 }
 
