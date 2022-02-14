@@ -1,0 +1,54 @@
+.notes-full-page {
+    display: grid;
+    grid-template-areas:
+                "a b c";
+    position: absolute;
+    top: 1%;
+    width: 100%;
+    height: 100%;
+}
+
+.notes-nav-space {
+    width: 25%;
+    max-width: 350px;
+    min-width: 200px;
+    height: 100%;
+    padding-top: 10px;
+    grid-area: a;
+}
+
+.notes-component-page {
+    width: 100%;
+    grid-area: b;
+    display: flex;
+    flex-direction: column;
+}
+
+.note-card-parent {
+    background-color: white;
+    box-shadow: 1px 1px 20px rgba(1, 1, 1, .5);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.note-card-title {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.note-card-content {
+    margin-top: 5px;
+}
+
+#note-delete-icon {
+    border: none;
+}
+
+.note-card-delete-button {
+    border: none;
+    background-color: none;
+}
+
+.note-edit-area {
+    grid-area: c;
+}

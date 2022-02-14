@@ -3,7 +3,7 @@ import { REMOVE_USER } from "./session";
 
 const CREATE_NOTEBOOK = 'notebook/createNotebook';
 const UPDATE_NOTEBOOK = 'notebook/updateNotebook';
-const REMOVE_NOTEBOOK = 'notebook/removeNotebook';
+export const REMOVE_NOTEBOOK = 'notebook/removeNotebook';
 const LOAD_NOTEBOOK = 'notebook/loadNotebook';
 
 const createNotebook = (payload) => {
@@ -110,6 +110,7 @@ const notebookReducer = (state = initialState, action) => {
             delete newBook[action.book.id]
             return newBook
         }
+
 
         case UPDATE_NOTEBOOK: {
             const newBook = { ...state }
