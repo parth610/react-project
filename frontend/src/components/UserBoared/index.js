@@ -174,10 +174,10 @@ function UserBoared () {
             <nav className='user-board-body'>
                 <div className='user-nav-container'>
                     <ProfileButton user={sessionUser}/>
-                    <div className='searchbar-container'>
+                    {/* <div className='searchbar-container'>
                         <i className="fas fa-search" id='search-icon' />
                         <input type='search' placeholder='Search' className='search-input'/>
-                    </div>
+                    </div> */}
                     <div className='new-button-container'>
                         <button className='new-button' onClick={openCreateButtons}> <i id='plus-icon' className='fas fa-plus'/>New</button>
                         {showCreateButtons && (
@@ -205,7 +205,7 @@ function UserBoared () {
                         return (
                             <div key={book.id}>
                             <div id={`book-title-editable-${book.id}`}><p className='nav-book-list' id={`book-title-${book.id}`}><i id='note-icon' className='fas fa-book'/>{book.title}</p>
-                            <span><button id={`${book.id}`} onClick={clickDeleteHandle}>del</button></span>
+                            <span><button className='notebook-delete' id={`${book.id}`} onClick={clickDeleteHandle}>Delete</button></span>
                             </div>
                             </div>
                             )
@@ -247,7 +247,7 @@ function UserBoared () {
                     </select>
                     </label>
                     <label>Title
-                        <input type='text' value={noteTitle} onChange={(e) => setNoteTitle(e.target.value)}/>
+                        <input className='note-form-input' type='text' value={noteTitle} onChange={(e) => setNoteTitle(e.target.value)}/>
                     </label>
                     <ul className='note-form-errors'>
                         {noteErrors.length > 0 && noteErrors.map(error => {

@@ -61,6 +61,7 @@
 .note-card-delete-button {
     border: none;
     background-color: rgb(135, 135, 135, 0);
+    color: red;
 }
 
 .note-edit-area {

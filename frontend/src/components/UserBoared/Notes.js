@@ -111,7 +111,7 @@ function NotesComponent () {
                     <div className='note-card-content'>{note.content}</div>
                 </div>
                 <div className='note-time'>{timeCal(note.updatedAt)}</div>
-                <button className='note-card-delete-button' id={note.id} onClick={noteDeleteHandle} ><i className='fas fa-trash' id='note-delete-icon'/></button>
+                <button className='note-card-delete-button' id={note.id} onClick={noteDeleteHandle} >Delete</button>
                     </div>
                 )
             })}

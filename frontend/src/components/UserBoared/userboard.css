@@ -372,3 +372,10 @@
     color: red;
     font-size: 12px;
 }
+
+.notebook-delete {
+    border: none;
+    background-color: rgb(117, 117, 117, 0);
+    color: red;
+    font-size: 12px;
+}
