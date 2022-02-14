@@ -348,3 +348,20 @@
     color: white;
     padding: 5px 0 5px 5px;
 }
+
+.notebook-form-errors {
+    display: none;
+    list-style: none;
+    color: red;
+    padding: 0;
+    font-size: 14px;
+}
+
+.note-form-errors {
+    display: none;
+    list-style: none;
+    color: red;
+    padding: 0;
+    font-size: 12px;
+    flex-direction: column;
+}

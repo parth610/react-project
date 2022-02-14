@@ -13,11 +13,12 @@ function UserBoared () {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     const [title, setTitle] = useState('');
-    const [noteTitle, setNoteTitle] = useState('Untitled');
+    const [noteTitle, setNoteTitle] = useState('');
     const [content, setContent] = useState('')
-    const [selectNotebook, setSelectNotebook] = useState(null);
+    const [selectNotebook, setSelectNotebook] = useState('');
     const [showCreateButtons, setShowCreateButtons] = useState(false)
     const [noteErrors, setNoteErrors] = useState([]);
+    const [notebookErrors, setNotebookErrors] = useState([])
 
     const openCreateButtons = () => {
         if (showCreateButtons) return;
@@ -52,15 +53,37 @@ function UserBoared () {
         }
     }, [dispatch, sessionUser])
 
+    useEffect(() => {
+        const errors = [];
+        if (title.length < 3 || title.length > 20) errors.push('Title must be more than 3 characters and less than 20 characters');
+        setNotebookErrors(errors)
+    }, [title])
+
+    useEffect(() => {
+        const errors = [];
+        if (noteTitle.length < 3 || noteTitle.length > 20) errors.push('Title must be more than 3 characters and less than 20 characters');
+        if (!selectNotebook.length) errors.push('Please select the notebook from the dropdown list');
+        setNoteErrors(errors)
+    },[noteTitle, selectNotebook])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const payload = {
             title,
             user_id: sessionUser.id
         }
-        dispatch(addNotebook(payload));
-        const container = document.getElementsByClassName('notebook-form-page')[0];
-        container.style.display = 'none';
+        const container1 = document.getElementsByClassName('notebook-form-errors')[0];
+
+        if (title.length < 3 || title.length > 20) {
+            container1.style.display = 'block'
+            return;
+        } else {
+            dispatch(addNotebook(payload))
+            const container = document.getElementsByClassName('notebook-form-page')[0];
+            container.style.display = 'none';
+            container1.style.display = 'none'
+        }
     }
 
     const clickDeleteHandle = (e) => {
@@ -99,9 +122,16 @@ function UserBoared () {
             content,
             bookId: selectNotebook
         }
-        dispatch(addNote(data));
-        const container = document.getElementsByClassName('note-form-page')[0];
-        container.style.display = 'none';
+
+        const errorContainer = document.getElementsByClassName('note-form-errors')[0]
+        if (noteTitle.length < 3 || noteTitle.length > 20 || !selectNotebook.length) {
+            errorContainer.style.display = 'flex'
+        } else {
+            dispatch(addNote(data));
+            const container = document.getElementsByClassName('note-form-page')[0];
+            container.style.display = 'none';
+            errorContainer.style.display = 'none'
+        }
     }
 
     const createNotebookForm = (e) => {
@@ -189,6 +219,13 @@ function UserBoared () {
                             Title
                             <input placeholder='Notebook name' className='notebook-form-input' type='text' value={title} onChange={(e) => setTitle(e.target.value)} />
                             </label>
+                            <ul className='notebook-form-errors'>
+                                {notebookErrors.length > 0 && notebookErrors.map(error => {
+                                    return (
+                                        <li key={error.length}>{error}</li>
+                                    )
+                                })}
+                            </ul>
                         <button className='notebook-form-button' type='submit'>New Notebook</button>
                         </form>
                     </div>
@@ -207,7 +244,16 @@ function UserBoared () {
                     })}
                     </select>
                     </label>
-
+                    <label>Title
+                        <input type='text' value={noteTitle} onChange={(e) => setNoteTitle(e.target.value)}/>
+                    </label>
+                    <ul className='note-form-errors'>
+                        {noteErrors.length > 0 && noteErrors.map(error => {
+                            return (
+                                <li key={error.length}>{error}</li>
+                            )
+                        })}
+                    </ul>
                     <button className='note-form-button' type='submit'>New Note</button>
                     </form>
                     </div>
