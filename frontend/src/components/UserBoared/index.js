@@ -174,10 +174,10 @@ function UserBoared () {
             <nav className='user-board-body'>
                 <div className='user-nav-container'>
                     <ProfileButton user={sessionUser}/>
-                    {/* <div className='searchbar-container'>
+                    <div className='searchbar-container'>
                         <i className="fas fa-search" id='search-icon' />
                         <input type='search' placeholder='Search' className='search-input'/>
-                    </div> */}
+                    </div>
                     <div className='new-button-container'>
                         <button className='new-button' onClick={openCreateButtons}> <i id='plus-icon' className='fas fa-plus'/>New</button>
                         {showCreateButtons && (
@@ -198,7 +198,7 @@ function UserBoared () {
                             <p className='notebooks-nav'><i id='note-icon' className='fas fa-swatchbook'/>Notebooks</p>
                         </div>
                     </NavLink>
-                    <i onClick={showDropdown} id='notebook-list-down-arrow' className='fas fa-level-down-alt'/>
+                    <i onClick={showDropdown} id='notebook-list-down-arrow' className='fas fa-chevron-down'/>
                     </div>
                     <div style={{display: 'none'}} className='notebooks-dropdown-lists'>
                     {notebooks.map(book => {

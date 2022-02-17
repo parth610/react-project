@@ -6,14 +6,14 @@
 .user-nav-container {
     background-color: rgb(24, 24, 24);
     color: rgb(216, 216, 216);
-    width: 30%;
-    max-width: 350px;
-    min-width: 250px;
+
+    width: 250px;
     height: 100%;
     padding-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .user-profile-container {
@@ -95,7 +95,7 @@
 
 .searchbar-container {
     width: 98%;
-    height: 50px;
+    height: fit-content;
     margin: 5px ;
     display: flex;
     align-items: center;
@@ -105,7 +105,6 @@
 #search-icon {
     font-size: 20px;
     padding: 10px;
-    height: 20px;
     background-color: rgb(58, 58, 58);
     color: rgb(216, 216, 216);
     border: none;
@@ -117,7 +116,7 @@
 .search-input {
     width: 80%;
     height: 40px;
-    padding: 5px;
+    padding-left: 5px;
     background-color: rgb(58, 58, 58);
     color: rgb(216, 216, 216);
     border: none;
