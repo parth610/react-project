@@ -205,7 +205,6 @@ function UserBoared () {
                         return (
                             <div key={book.id}>
                             <div id={`book-title-editable-${book.id}`}><p className='nav-book-list' id={`book-title-${book.id}`}><i id='note-icon' className='fas fa-book'/>{book.title}</p>
-                            <span><button className='notebook-delete' id={`${book.id}`} onClick={clickDeleteHandle}>Delete</button></span>
                             </div>
                             </div>
                             )

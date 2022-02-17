@@ -47,20 +47,35 @@ function NotebookComponent () {
     const clickEditHandle = (e) => {
         e.preventDefault();
         const changeTitle = document.getElementById(`book-page-title-${e.target.id}`)
-
-        const bookData = {
-            updatedTitle: changeTitle.innerHTML,
-            bookId: e.target.id
+        if (changeTitle.innerHTML.length < 3 || changeTitle.innerHTML.length > 20) {
+            alert('title needs to be more than 3 characters or less than 20 characters.')
+        } else {
+            const bookData = {
+                updatedTitle: changeTitle.innerHTML,
+                bookId: e.target.id
+            }
+            const titleDiv = document.querySelector(`#book-page-title-editable-${e.target.id}`)
+            const editButtons = document.getElementById(`notebook-edit-buttons-${e.target.id}`)
+            titleDiv.setAttribute('contentEditable', 'false')
+            editButtons.style.display = 'none';
+            return dispatch(updateNotebookTitle(bookData))
         }
+    }
+
+    const cancelEditNotebook = (e) => {
         const titleDiv = document.querySelector(`#book-page-title-editable-${e.target.id}`)
+        const editButtons = document.getElementById(`notebook-edit-buttons-${e.target.id}`)
         titleDiv.setAttribute('contentEditable', 'false')
-        return dispatch(updateNotebookTitle(bookData))
+        editButtons.style.display = 'none';
     }
 
     const changeEditAttribute = (e) => {
+        const editButtons = document.getElementById(`notebook-edit-buttons-${e.target.id}`)
         const titleDiv = document.querySelector(`#book-page-title-editable-${e.target.id}`)
         titleDiv.setAttribute('contentEditable', 'true')
         titleDiv.focus();
+        notebookOptions(e);
+        editButtons.style.display = 'flex';
     }
 
     const notebookDate = (date) => {
@@ -122,7 +137,12 @@ function NotebookComponent () {
                 return (
                     <tr key={book.id}>
                     <td className="notebook-title-column">
-                <div id={`book-page-title-editable-${book.id}`} contentEditable='false' suppressContentEditableWarning='true'><p id={`book-page-title-${book.id}`}>{book.title}</p></div>
+                <div id={`book-page-title-editable-${book.id}`} contentEditable='false' suppressContentEditableWarning='true'><p id={`book-page-title-${book.id}`}>{book.title}</p>
+                </div>
+                            <div className="notebook-edit-buttons" id={`notebook-edit-buttons-${book.id}`}>
+                            <button className="notebook-edit-confirm" id={`${book.id}`} onClick={clickEditHandle}>Confirm</button>
+                            <button className="notebook-edit-cancel" id={`${book.id}`} onClick={cancelEditNotebook}>Cancel</button>
+                            </div>
                         </td>
                         <td className="notebook-user-column">{sessionUser.username}</td>
                         <td className="notebook-updated-column">{
@@ -146,9 +166,6 @@ function NotebookComponent () {
                                 </div>
                             </div>
                         </div>
-                            <div>
-                            <button className="notebook-edit-confirm" id={`${book.id}`} onClick={clickEditHandle}>Confirm</button>
-                            </div>
 
                         </td>
                 </tr>
