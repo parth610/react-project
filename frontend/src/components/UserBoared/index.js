@@ -193,7 +193,7 @@ function UserBoared () {
                         </div>
                     </NavLink>
                     <div className='notebooks-nav-adjustment'>
-                    <NavLink className='notebooks-navlink-container' to={`/${sessionUser.id}/Notebooks`}>
+                    <NavLink className='notebooks-navlink-container' exact to={`/${sessionUser.id}/Notebooks`}>
                         <div className='notebooks-nav-container'>
                             <p className='notebooks-nav'><i id='note-icon' className='fas fa-swatchbook'/>Notebooks</p>
                         </div>
@@ -204,8 +204,8 @@ function UserBoared () {
                     {notebooks.map(book => {
                         return (
                             <div key={book.id}>
-                            <div id={`book-title-editable-${book.id}`}><p className='nav-book-list' id={`book-title-${book.id}`}><i id='note-icon' className='fas fa-book'/>{book.title}</p>
-                            </div>
+                            <NavLink to={`/${sessionUser.id}/notebooks/${book.id}`} id={`book-title-editable-${book.id}`}><p className='nav-book-list' id={`book-title-${book.id}`}><i id='note-icon' className='fas fa-book'/>{book.title}</p>
+                            </NavLink>
                             </div>
                             )
                          })}

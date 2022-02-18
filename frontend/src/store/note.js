@@ -65,6 +65,17 @@ export const getNotes = () => async (dispatch) => {
     }
 }
 
+export const getSelectedNotes = (data) => async (dispatch) => {
+    const {notebookId} = data
+    const response = await csrfFetch(`/api/notebook/${notebookId}`, {
+        method: 'GET',
+    })
+    if (response.ok) {
+        const selectedNotes = await response.json();
+        dispatch(loadNotes(selectedNotes))
+    }
+}
+
 export const deleteNote = (noteData) => async (dispatch) => {
     const {noteId} = noteData;
     const response = await csrfFetch(`/api/note/${noteId}`, {
@@ -100,6 +111,8 @@ const noteReducer = (state = initialState, action) => {
         };
 
         case LOAD_NOTE: {
+            state = {}
+            console.log(state)
             const newNotes = {};
             action.notes.forEach(note => {
                 newNotes[note.id] = note

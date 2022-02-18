@@ -2,7 +2,7 @@ const express = require('express')
 const asyncHandler = require('express-async-handler');
 const {handleValidationErrors} = require('../../utils/validation');
 const { requireAuth, restoreUser } = require('../../utils/auth');
-const { Notebook, User } = require('../../db/models')
+const { Notebook, User, Note } = require('../../db/models')
 
 const router = express.Router();
 
@@ -41,6 +41,16 @@ router.put('/:id', requireAuth, asyncHandler(async(req, res, next) => {
         await updateBook.save();
     }
     res.json(updateBook)
+}))
+
+router.get('/:id', requireAuth, asyncHandler(async(req, res, next) => {
+    const currUser = req.user.dataValues.id;
+    const notebookId = req.params.id;
+
+    const notes = await Note.findAll({
+        where: {user_id: currUser, notebook_id: notebookId}
+    })
+    return res.json(notes)
 }))
 
 module.exports = router;

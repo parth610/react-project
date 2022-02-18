@@ -9,6 +9,8 @@ import Navigation from "./components/Navigation";
 import UserBoared from "./components/UserBoared";
 import NotebookComponent from "./components/UserBoared/Notebook";
 import NotesComponent from "./components/UserBoared/Notes";
+import SelectedNotesComponent from "./components/UserBoared/SelectedNotes";
+
 
 function App() {
 
@@ -17,8 +19,8 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
-
   const sessionUser = useSelector(state => state.session.user)
+
   let sessionRoutes;
   if (sessionUser) {
     sessionRoutes =(
@@ -28,11 +30,14 @@ function App() {
         <UserBoared />
       </Route>
       <Switch>
-      <Route path='/:id/Notebooks'>
+      <Route exact path='/:id/Notebooks'>
         <NotebookComponent />
       </Route>
       <Route path='/:id/notes'>
         <NotesComponent />
+      </Route>
+      <Route path='/:id/notebooks/:id'>
+        <SelectedNotesComponent />
       </Route>
     </Switch>
       </>
