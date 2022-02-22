@@ -204,7 +204,7 @@ function UserBoared () {
                     {notebooks.map(book => {
                         return (
                             <div key={book.id}>
-                            <NavLink to={`/${sessionUser.id}/notebooks/${book.id}`} id={`book-title-editable-${book.id}`}><p className='nav-book-list' id={`book-title-${book.id}`}><i id='note-icon' className='fas fa-book'/>{book.title}</p>
+                            <NavLink className='book-list-navlink-container' exact to={`/${sessionUser.id}/notebooks/${book.id}`} id={`book-title-editable-${book.id}`}><p className='nav-book-list' id={`book-title-${book.id}`}><i id='note-icon' className='fas fa-book'/>{book.title}</p>
                             </NavLink>
                             </div>
                             )

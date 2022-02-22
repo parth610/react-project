@@ -112,7 +112,6 @@ const noteReducer = (state = initialState, action) => {
 
         case LOAD_NOTE: {
             state = {}
-            console.log(state)
             const newNotes = {};
             action.notes.forEach(note => {
                 newNotes[note.id] = note

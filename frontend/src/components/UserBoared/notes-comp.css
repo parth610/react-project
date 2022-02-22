@@ -38,6 +38,17 @@
     margin: 5px 5px;
 }
 
+.note-card-parent-selected {
+    background-color: white;
+    box-shadow: 1px 1px 12px #00A82D;
+    border-radius: 10px;
+    padding: 15px;
+    width: 200px;
+    height: 200px;
+    margin: 5px 5px;
+    border: #00A82D 3px solid;
+}
+
 .note-card-title {
     font-size: 18px;
     font-weight: 500;
@@ -107,4 +118,28 @@
     border-radius: 5px;
     background-color: #00A82D;
     color: white;
+}
+
+.note-delete-confirmation-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(36, 36, 36, .5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.note-delete-confirmation-card {
+    display: flex;
+    background-color: white;
+    width: 300px;
+    height: fit-content;
+    flex-direction: column;
+    padding: 15px;
+    box-shadow: 1px 1px 10px rgb(36, 36, 36, .1);
+    border-radius: 5px;
+    font-size: 16px;
 }

@@ -105,7 +105,7 @@ function NotesComponent () {
         <div className='note-cards-container'>
             {allNotes.map(note => {
                 return (
-                    <div className='note-card-parent' key={note.id}>
+                    <div className={noteIdSelected === note.id ? 'note-card-parent-selected' : 'note-card-parent'} key={`note-card-parent-${note.id}`}>
                     <div className='note-card-container' data-note={JSON.stringify(note)}  onClick={noteEditClick}>
                     <div className='note-card-title'>{note.title}</div>
                     <div className='note-card-content'>{note.content}</div>
@@ -119,8 +119,8 @@ function NotesComponent () {
         </div>
         <div className='note-edit-area'>
             <div>Edit your note</div>
-            <input className='note-title-edit-input' value={noteTitleUpdate} onChange={(e) => setNoteTitleUpdate(e.target.value)}/>
-            <textarea className='note-content-edit-input' value={noteContent} onChange={(e) => setNoteContent(e.target.value)}/>
+            <input className='note-title-edit-input' disabled={noteIdSelected ? false : true} value={noteTitleUpdate} onChange={(e) => setNoteTitleUpdate(e.target.value)}/>
+            <textarea className='note-content-edit-input' disabled={noteIdSelected ? false : true} value={noteContent} onChange={(e) => setNoteContent(e.target.value)}/>
             <button className='note-save-button' id={noteIdSelected} onClick={updateNoteHandle}>Save</button>
         </div>
         </div>

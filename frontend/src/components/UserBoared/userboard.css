@@ -288,6 +288,12 @@
     align-items: center;
 }
 
+.book-list-navlink-container {
+    text-decoration: none;
+    color:rgb(216, 216, 216);
+    width: 100%;
+}
+
 #notebook-list-down-arrow {
     margin-left: 20px;
 }

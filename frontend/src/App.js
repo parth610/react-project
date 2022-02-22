@@ -36,7 +36,7 @@ function App() {
       <Route path='/:id/notes'>
         <NotesComponent />
       </Route>
-      <Route path='/:id/notebooks/:id'>
+      <Route exact path='/:id/notebooks/:id'>
         <SelectedNotesComponent />
       </Route>
     </Switch>

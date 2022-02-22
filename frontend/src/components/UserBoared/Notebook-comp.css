@@ -187,3 +187,8 @@ tbody > tr:nth-child(odd) {
     align-items: center;
     border: none;
 }
+
+.notebook-page-list-navlink {
+    text-decoration: none;
+    color: black;
+}

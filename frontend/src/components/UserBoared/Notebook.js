@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import { getNotebooks, addNotebook, deleteNotebook, updateNotebookTitle } from "../../store/notebook";
 import './Notebook-comp.css'
 
@@ -137,8 +137,8 @@ function NotebookComponent () {
                 return (
                     <tr key={book.id}>
                     <td className="notebook-title-column">
-                <div id={`book-page-title-editable-${book.id}`} contentEditable='false' suppressContentEditableWarning='true'><p id={`book-page-title-${book.id}`}>{book.title}</p>
-                </div>
+                <NavLink className='notebook-page-list-navlink' exact to={`/${sessionUser.id}/notebooks/${book.id}`} id={`book-page-title-editable-${book.id}`} contentEditable='false' suppressContentEditableWarning='true'><p id={`book-page-title-${book.id}`}><i id='note-icon' className='fas fa-book'/>{book.title}</p>
+                </NavLink>
                             <div className="notebook-edit-buttons" id={`notebook-edit-buttons-${book.id}`}>
                             <button className="notebook-edit-confirm" id={`${book.id}`} onClick={clickEditHandle}>Confirm</button>
                             <button className="notebook-edit-cancel" id={`${book.id}`} onClick={cancelEditNotebook}>Cancel</button>
