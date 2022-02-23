@@ -47,11 +47,12 @@ function NotebookComponent () {
     const clickEditHandle = (e) => {
         e.preventDefault();
         const changeTitle = document.getElementById(`book-page-title-${e.target.id}`)
-        if (changeTitle.innerHTML.length < 3 || changeTitle.innerHTML.length > 20) {
+        console.log(changeTitle.innerText)
+        if (changeTitle.innerText.length < 3 || changeTitle.innerText.length > 20) {
             alert('title needs to be more than 3 characters or less than 20 characters.')
         } else {
             const bookData = {
-                updatedTitle: changeTitle.innerHTML,
+                updatedTitle: changeTitle.innerText,
                 bookId: e.target.id
             }
             const titleDiv = document.querySelector(`#book-page-title-editable-${e.target.id}`)
@@ -72,8 +73,10 @@ function NotebookComponent () {
     const changeEditAttribute = (e) => {
         const editButtons = document.getElementById(`notebook-edit-buttons-${e.target.id}`)
         const titleDiv = document.querySelector(`#book-page-title-editable-${e.target.id}`)
+        const div = document.createElement('div');
         titleDiv.setAttribute('contentEditable', 'true')
         titleDiv.focus();
+        titleDiv.style.pointerEvents = 'none'
         notebookOptions(e);
         editButtons.style.display = 'flex';
     }
