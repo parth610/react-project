@@ -89,6 +89,7 @@ const initialState = {};
 const notebookReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_NOTEBOOK: {
+            state = {}
             const newBooks = {};
             action.books.forEach(book => {
                 newBooks[book.id] = book;

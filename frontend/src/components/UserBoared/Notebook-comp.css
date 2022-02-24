@@ -159,6 +159,7 @@ tbody > tr:nth-child(odd) {
 [contentEditable]:read-write {
     background-color: white;
     padding: 1px 3px;
+    min-width: 20px;
 }
 
 .notebook-edit-buttons {

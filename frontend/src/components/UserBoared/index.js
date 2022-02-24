@@ -41,6 +41,9 @@ function UserBoared () {
         if (!sessionUser) return (
             history.push('/')
         )
+        if (sessionUser) return (
+            history.push(`/${sessionUser.id}/notes`)
+        )
     }, [sessionUser]);
 
     const notebooks = useSelector(state => {

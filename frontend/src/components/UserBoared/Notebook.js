@@ -22,7 +22,8 @@ function NotebookComponent () {
      })
 
      useEffect(() => {
-        if (sessionUser) {
+         if (sessionUser) {
+
             dispatch(getNotebooks())
         }
     }, [dispatch, sessionUser])
@@ -47,17 +48,18 @@ function NotebookComponent () {
     const clickEditHandle = (e) => {
         e.preventDefault();
         const changeTitle = document.getElementById(`book-page-title-${e.target.id}`)
-        console.log(changeTitle.innerText)
+        const titleDiv = document.querySelector(`#book-page-title-editable-${e.target.id}`)
         if (changeTitle.innerText.length < 3 || changeTitle.innerText.length > 20) {
             alert('title needs to be more than 3 characters or less than 20 characters.')
+            titleDiv.focus();
         } else {
             const bookData = {
                 updatedTitle: changeTitle.innerText,
                 bookId: e.target.id
             }
-            const titleDiv = document.querySelector(`#book-page-title-editable-${e.target.id}`)
             const editButtons = document.getElementById(`notebook-edit-buttons-${e.target.id}`)
             titleDiv.setAttribute('contentEditable', 'false')
+            titleDiv.style.pointerEvents = 'auto';
             editButtons.style.display = 'none';
             return dispatch(updateNotebookTitle(bookData))
         }
@@ -65,8 +67,14 @@ function NotebookComponent () {
 
     const cancelEditNotebook = (e) => {
         const titleDiv = document.querySelector(`#book-page-title-editable-${e.target.id}`)
+        const changeTitle = document.getElementById(`book-page-title-${e.target.id}`)
         const editButtons = document.getElementById(`notebook-edit-buttons-${e.target.id}`)
+        const currentBook = notebooks.find(book => {
+            return book.id === +e.target.id
+        })
+        changeTitle.innerText = currentBook.title
         titleDiv.setAttribute('contentEditable', 'false')
+        titleDiv.style.pointerEvents = 'auto'
         editButtons.style.display = 'none';
     }
 
@@ -140,7 +148,8 @@ function NotebookComponent () {
                 return (
                     <tr key={book.id}>
                     <td className="notebook-title-column">
-                <NavLink className='notebook-page-list-navlink' exact to={`/${sessionUser.id}/notebooks/${book.id}`} id={`book-page-title-editable-${book.id}`} contentEditable='false' suppressContentEditableWarning='true'><p id={`book-page-title-${book.id}`}><i id='note-icon' className='fas fa-book'/>{book.title}</p>
+                    <i contentEditable='false' id='note-icon' className='fas fa-book'/>
+                <NavLink className='notebook-page-list-navlink' exact to={`/${sessionUser.id}/notebooks/${book.id}`} id={`book-page-title-editable-${book.id}`} contentEditable='false' suppressContentEditableWarning='true'><p id={`book-page-title-${book.id}`}>{book.title}</p>
                 </NavLink>
                             <div className="notebook-edit-buttons" id={`notebook-edit-buttons-${book.id}`}>
                             <button className="notebook-edit-confirm" id={`${book.id}`} onClick={clickEditHandle}>Confirm</button>
