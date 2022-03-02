@@ -8,6 +8,7 @@ const routes = require('./routes')
 const {ValidationError} = require('sequelize');
 
 const {environment} = require('./config');
+const { NONE } = require('sequelize');
 const isProduction = environment === 'production';
 
 const app = express();
@@ -28,7 +29,7 @@ app.use(
     csurf({
         cookie: {
             secure: isProduction,
-            sameSite: isProduction && "Lax",
+            sameSite: 'none',
             httpOnly: true
         }
     })

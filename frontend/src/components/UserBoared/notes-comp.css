@@ -143,3 +143,33 @@
     border-radius: 5px;
     font-size: 16px;
 }
+
+.note-delete-confirmation-card > p {
+    text-align: center;
+}
+
+.delete-note-confirmation-buttons {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.delete-note-yes {
+    padding: 5px 30px;
+    margin: 5px;
+    background-color: #00A82D;
+    color: white;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.delete-note-cancel {
+    padding: 5px 30px;
+    margin: 5px;
+    background-color: #636363;
+    color: white;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}

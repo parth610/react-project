@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {addNote, getNotes, deleteNote, editNote} from '../../store/note'
 import './notes-comp.css'
+import {Editor} from '@tinymce/tinymce-react'
 
 function NotesComponent () {
     const dispatch = useDispatch();
@@ -10,8 +11,9 @@ function NotesComponent () {
     const sessionUser = useSelector(state => state.session.user);
 
     const [noteTitleUpdate, setNoteTitleUpdate] = useState('')
-    const [noteContent, setNoteContent] = useState('')
+    const [noteContent, setNoteContent] = useState('a')
     const [noteIdSelected, setNoteIdSelected] = useState(null)
+    const [deleteNoteSelect, setDeleteNoteSelect] = useState({})
 
     useEffect(() => {
         if (!sessionUser) return (
@@ -35,7 +37,8 @@ function NotesComponent () {
         const noteData = {
             noteId: e.target.id
         }
-        return dispatch(deleteNote(noteData))
+        dispatch(deleteNote(noteData))
+        deleteNoteConfirmDisplay();
     }
 
     const updateNoteHandle = (e) => {
@@ -55,6 +58,34 @@ function NotesComponent () {
         setNoteContent(selectedNote.content);
         setNoteTitleUpdate(selectedNote.title)
         setNoteIdSelected(selectedNote.id)
+    }
+
+    const deleteNoteConfirmation = async (e) => {
+        e.preventDefault();
+        let noteObject = {}
+        const noteId = e.target.id;
+        const findNote = allNotes.find((note) => {
+            return note.id === +noteId
+        })
+        noteObject = {...findNote}
+        setDeleteNoteSelect(deleteNote =>({
+            ...deleteNote,
+            ...noteObject
+        }))
+    }
+
+    const deleteNoteConfirmDisplay = (e) => {
+        const confCard = document.getElementById(`note-delete-confirmation`);
+        if (confCard.style.display === 'none' || !confCard.style.display) {
+            confCard.style.display = 'flex';
+        } else {
+            confCard.style.display = 'none'
+        }
+    }
+
+    const deleteNoteFunctionHandles = (e) => {
+        deleteNoteConfirmation(e);
+        deleteNoteConfirmDisplay(e)
     }
 
     const timeCal = (date) => {
@@ -111,7 +142,7 @@ function NotesComponent () {
                     <div className='note-card-content'>{note.content}</div>
                 </div>
                 <div className='note-time'>{timeCal(note.updatedAt)}</div>
-                <button className='note-card-delete-button' id={note.id} onClick={noteDeleteHandle} >Delete</button>
+                <button className='note-card-delete-button' id={note.id} onClick={deleteNoteFunctionHandles} >Delete</button>
                     </div>
                 )
             })}
@@ -120,8 +151,19 @@ function NotesComponent () {
         <div className='note-edit-area'>
             <div>Edit your note</div>
             <input className='note-title-edit-input' disabled={noteIdSelected ? false : true} value={noteTitleUpdate} onChange={(e) => setNoteTitleUpdate(e.target.value)}/>
-            <textarea className='note-content-edit-input' disabled={noteIdSelected ? false : true} value={noteContent} onChange={(e) => setNoteContent(e.target.value)}/>
+            <Editor
+                apiKey='26ankohy4dhktzq14y054kwjk0889j3jevb25qz9hoy0nf05'
+             className='note-content-edit-input' disabled={noteIdSelected ? false : true} value={noteContent} onEditorChange={(e) => setNoteContent(e.target.value)}/>
             <button className='note-save-button' id={noteIdSelected} onClick={updateNoteHandle}>Save</button>
+        </div>
+        <div className='note-delete-confirmation-bg' id={`note-delete-confirmation`}>
+            <div className='note-delete-confirmation-card'>
+                <p>Are you sure you want to DELETE "{deleteNoteSelect.title}"?</p>
+                <div className="delete-note-confirmation-buttons">
+                    <div className="delete-note-yes" id={deleteNoteSelect.id}  onClick={noteDeleteHandle}>Yes</div>
+                    <div className="delete-note-cancel" id={deleteNoteSelect.id}  onClick={deleteNoteConfirmDisplay}>No</div>
+                </div>
+            </div>
         </div>
         </div>
     )
