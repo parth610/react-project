@@ -11,9 +11,10 @@ function NotesComponent () {
     const sessionUser = useSelector(state => state.session.user);
 
     const [noteTitleUpdate, setNoteTitleUpdate] = useState('')
-    const [noteContent, setNoteContent] = useState('a')
+    const [noteContent, setNoteContent] = useState('')
     const [noteIdSelected, setNoteIdSelected] = useState(null)
     const [deleteNoteSelect, setDeleteNoteSelect] = useState({})
+    const [noteContextText, setNoteContentText] = useState('')
 
     useEffect(() => {
         if (!sessionUser) return (
@@ -31,6 +32,12 @@ function NotesComponent () {
             dispatch(getNotes())
         }
     },[dispatch, sessionUser])
+
+    const noteContentText = (content) => {
+        const element = document.createElement('div');
+        element.innerHTML = content;
+        return element.innerText;
+    }
 
     const noteDeleteHandle = (e) => {
         e.preventDefault();
@@ -139,7 +146,7 @@ function NotesComponent () {
                     <div className={noteIdSelected === note.id ? 'note-card-parent-selected' : 'note-card-parent'} key={`note-card-parent-${note.id}`}>
                     <div className='note-card-container' data-note={JSON.stringify(note)}  onClick={noteEditClick}>
                     <div className='note-card-title'>{note.title}</div>
-                    <div className='note-card-content'>{note.content}</div>
+                    <div className='note-card-content'>{noteContentText(note.content)}</div>
                 </div>
                 <div className='note-time'>{timeCal(note.updatedAt)}</div>
                 <button className='note-card-delete-button' id={note.id} onClick={deleteNoteFunctionHandles} >Delete</button>
@@ -153,7 +160,13 @@ function NotesComponent () {
             <input className='note-title-edit-input' disabled={noteIdSelected ? false : true} value={noteTitleUpdate} onChange={(e) => setNoteTitleUpdate(e.target.value)}/>
             <Editor
                 apiKey='26ankohy4dhktzq14y054kwjk0889j3jevb25qz9hoy0nf05'
-             className='note-content-edit-input' disabled={noteIdSelected ? false : true} value={noteContent} onEditorChange={(e) => setNoteContent(e.target.value)}/>
+                init={{menubar:false,
+                        height:500,
+                        toolbar: ['fontsizeselect | link image | undo redo | styleselect | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent',
+                                    ''],
+                        body_class: 'note-content-edit-input'
+                }}
+             className='note-content-edit-input' disabled={noteIdSelected ? false : true} value={noteContent} onEditorChange={(e, editor) => setNoteContent(e)}/>
             <button className='note-save-button' id={noteIdSelected} onClick={updateNoteHandle}>Save</button>
         </div>
         <div className='note-delete-confirmation-bg' id={`note-delete-confirmation`}>
