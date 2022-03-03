@@ -39,6 +39,9 @@ function App() {
       <Route exact path='/:id/notebooks/:id'>
         <SelectedNotesComponent />
       </Route>
+      <Route>
+        <h2>Page Not Found</h2>
+      </Route>
     </Switch>
       </>
     )

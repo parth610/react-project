@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import {addNote, getNotes, deleteNote, editNote, getSelectedNotes} from '../../store/note'
+import { getNotebooks } from '../../store/notebook';
 import './notes-comp.css'
+import {Editor} from '@tinymce/tinymce-react'
 
 function SelectedNotesComponent () {
     const dispatch = useDispatch();
@@ -24,7 +26,20 @@ function SelectedNotesComponent () {
         return Object.values(state.note)
     })
 
-    const {id} = useParams();
+
+    const notebooks = useSelector(state => {
+        return Object.values(state.notebook)
+     })
+
+
+     const {id} = useParams();
+
+     useEffect(() => {
+
+         if (sessionUser) {
+            dispatch(getNotebooks())
+        }
+    },[dispatch, sessionUser])
 
     useEffect(() => {
 
@@ -37,7 +52,18 @@ function SelectedNotesComponent () {
             setNoteContent('');
             setNoteTitleUpdate('');
         }
-    },[id])
+    },[id, dispatch])
+
+    const currentNotebook = notebooks.find(notebook => {
+        return notebook.id === +id;
+    })
+
+
+    const noteContentText = (content) => {
+        const element = document.createElement('div');
+        element.innerHTML = content;
+        return element.innerText;
+    }
 
     const noteDeleteHandle = (e) => {
         e.preventDefault();
@@ -138,15 +164,16 @@ function SelectedNotesComponent () {
     return (
         <div className='notes-full-page'>
         <div className='notes-component-page'>
-            <h2><i id='note-header-icon' className='fa fa-clipboard'/>Notes</h2>
-            <h4>{allNotes.length} notes</h4>
+            <h2 className='notes-page-header-2'><i id='note-header-icon' className='fa fa-clipboard'/>{`Notes in ${currentNotebook?.title}`}</h2>
+            {allNotes.length < 1 ? <h4 className='notes-page-header-3'>No Notes</h4> :
+            <h4 className='notes-page-header-3'>{allNotes.length > 1 ? `${allNotes.length} Notes` : '1 Note'}</h4>}
         <div className='note-cards-container'>
             {allNotes.map(note => {
                 return (
                     <div className={noteIdSelected === note.id ? 'note-card-parent-selected' : 'note-card-parent'} key={`note-card-parent-${note.id}`}>
                     <div className='note-card-container' data-note={JSON.stringify(note)}  onClick={noteEditClick}>
                     <div className='note-card-title'>{note.title}</div>
-                    <div className='note-card-content'>{note.content}</div>
+                    <div className='note-card-content'>{noteContentText(note.content)}</div>
                 </div>
                 <div className='note-time'>{timeCal(note.updatedAt)}</div>
                 <button className='note-card-delete-button' id={note.id} onClick={deleteNoteFunctionHandles} >Delete</button>
@@ -156,9 +183,17 @@ function SelectedNotesComponent () {
         </div>
         </div>
         <div className='note-edit-area'>
-            <div>Edit your note</div>
+            <div className='note-editarea-title'>Title</div>
             <input className='note-title-edit-input' disabled={noteIdSelected ? false : true} value={noteTitleUpdate} onChange={(e) => setNoteTitleUpdate(e.target.value)}/>
-            <textarea className='note-content-edit-input' disabled={noteIdSelected ? false : true} value={noteContent} onChange={(e) => setNoteContent(e.target.value)}/>
+            <Editor
+                apiKey='26ankohy4dhktzq14y054kwjk0889j3jevb25qz9hoy0nf05'
+                init={{menubar:false,
+                        height:500,
+                        toolbar: ['fontsizeselect | link image | undo redo | styleselect | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent',
+                                    ''],
+                        body_class: 'note-content-edit-input'
+                }}
+             className='note-content-edit-input' disabled={noteIdSelected ? false : true} value={noteContent} onEditorChange={(e, editor) => setNoteContent(e)}/>
             <button className='note-save-button' id={noteIdSelected} onClick={updateNoteHandle}>Save</button>
         </div>
         <div className='note-delete-confirmation-bg' id={`note-delete-confirmation`}>

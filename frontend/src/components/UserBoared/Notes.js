@@ -138,8 +138,8 @@ function NotesComponent () {
     return (
         <div className='notes-full-page'>
         <div className='notes-component-page'>
-            <h2><i id='note-header-icon' className='fa fa-clipboard'/>Notes</h2>
-            <h4>{allNotes.length} notes</h4>
+            <h2 className='notes-page-header-2'><i id='note-header-icon' className='fa fa-clipboard'/> All Notes</h2>
+            <h4 className='notes-page-header-3'>{allNotes.length > 1 ? `${allNotes.length} notes` : '1 note'}</h4>
         <div className='note-cards-container'>
             {allNotes.map(note => {
                 return (
@@ -156,7 +156,7 @@ function NotesComponent () {
         </div>
         </div>
         <div className='note-edit-area'>
-            <div>Edit your note</div>
+            <div className='note-editarea-title'>Title</div>
             <input className='note-title-edit-input' disabled={noteIdSelected ? false : true} value={noteTitleUpdate} onChange={(e) => setNoteTitleUpdate(e.target.value)}/>
             <Editor
                 apiKey='26ankohy4dhktzq14y054kwjk0889j3jevb25qz9hoy0nf05'
@@ -165,6 +165,7 @@ function NotesComponent () {
                         toolbar: ['fontsizeselect | link image | undo redo | styleselect | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent',
                                     ''],
                         body_class: 'note-content-edit-input'
+
                 }}
              className='note-content-edit-input' disabled={noteIdSelected ? false : true} value={noteContent} onEditorChange={(e, editor) => setNoteContent(e)}/>
             <button className='note-save-button' id={noteIdSelected} onClick={updateNoteHandle}>Save</button>

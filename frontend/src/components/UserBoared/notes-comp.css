@@ -14,9 +14,25 @@
     grid-column-start: 1;
     display: flex;
     flex-direction: column;
+    overflow-x: scroll;
     overflow-y: scroll;
     background-color: white;
 
+}
+
+.notes-page-header-2 {
+    margin-left: 10px;
+    font-weight: 400;
+}
+
+.notes-page-header-3 {
+    margin: 0 0 0 10px;
+    font-weight: 400;
+
+}
+
+#note-header-icon {
+    margin-right: 5px;
 }
 
 .note-cards-container {
@@ -175,3 +191,23 @@
     display: flex;
     align-items: center;
 }
+
+.note-editarea-title {
+    background-color: #e7e7e7;
+    margin: 20px 0 0;
+    padding: 5px 10px 5px 5px;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 0.3em;
+    visibility: hidden;
+  }
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+  }
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+  }
