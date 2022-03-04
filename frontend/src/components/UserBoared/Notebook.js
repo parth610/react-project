@@ -170,7 +170,7 @@ function NotebookComponent () {
                                 <div className='notebook-option-bg' onClick={notebookOptionsHide} id={book.id}> </div>
                                 <div className="notebook-delete-confirmation-bg" id={`notebook-delete-confirmation-${book.id}`}>
                                 <div className="notebook-delete-confirmation-card">
-                                    <p>Are you sure you want to DELETE notebook "{book.title}" ?</p>
+                                    <p>Are you sure you want to DELETE notebook "{book.title}" ? It will delete all the notes related with it.</p>
                                     <div className="delete-notebook-confirmation-buttons">
                                         <div className="delete-notebook-yes" id={book.id} onClick={clickDeleteHandle}>Yes</div>
                                         <div className="delete-notebook-cancel" id={book.id} onClick={notebookDeleteconfHide}>No</div>
