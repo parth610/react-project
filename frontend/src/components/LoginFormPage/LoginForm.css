@@ -71,10 +71,18 @@ body {
     width: 100%;
     height: 50px;
     border-radius: 5px;
-    border: none;
+    border: 2px solid #00A82D;
     background-color: #00A82D;
     color: white;
     font-size: 22px;
+}
+
+.login-button:hover {
+    cursor: pointer;
+    background-color: rgba(1, 1, 1, 0);
+    color: #00A82D;
+    border: 2px solid #00A82D;
+    border-radius: 5px;
 }
 
 .login-input-error {
@@ -109,4 +117,8 @@ body {
     text-decoration: none;
     color: #00A82D;
     font-size: 20px;
+}
+
+.signup-redirect-login-page:hover {
+    color: black;
 }

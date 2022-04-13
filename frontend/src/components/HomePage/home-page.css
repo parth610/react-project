@@ -28,6 +28,14 @@
     margin: 30px;
     color: aliceblue;
     font-size: 24px;
+    border: #00A82D 3px solid;
+}
+
+.get-started-button:hover {
+    background-color: rgba(0, 0, 0, 0);
+    border: #00A82D 3px solid;
+    border-radius: 5px;
+    color: #00A82D;
 }
 
 .info-cards {
