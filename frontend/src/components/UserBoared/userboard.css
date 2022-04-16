@@ -18,6 +18,13 @@
 
 .user-profile-container {
     width: 100%;
+    background-color: #00A82D;
+}
+
+.user-profile-button:hover {
+    background-color: rgb(216, 216, 216);
+    cursor: pointer;
+    color: rgb(17, 17, 17);
 }
 
 .user-profile-button {
@@ -44,11 +51,31 @@
     overflow: hidden;
 }
 
+@keyframes profile-dropdown-open {
+    from {transform: scale(1, 0);
+        transform-origin: top;
+    }
+    to {transform: scale(1, 1);
+        transform-origin: top;
+    }
+}
+
+@keyframes profile-dropdown-close {
+    from {transform: scale(1, 0);
+        transform-origin: top;
+    }
+    to {transform: scale(1, 1);
+        transform-origin: top;
+    }
+}
+
 .profile-dropdown-container {
     background-color: white;
     color: rgb(117, 117, 117);
     padding: 10px 0 1px 0;
     width: 100%;
+    animation-name: profile-dropdown-open;
+    animation-duration: 0.5s;
 }
 
 .profile-header {
@@ -88,9 +115,16 @@
     font-size: 14px;
     font-weight: 500;
     background-color:#00A82D;
-    border: none;
+    border: 1px solid #00A82D;
     margin-top: 6px;
     border-radius: 25px;
+}
+
+.logout-button:hover {
+    cursor: pointer;
+    background-color: white;
+    border: #00A82D 1px solid;
+    color: #00A82D;
 }
 
 .searchbar-container {
@@ -155,6 +189,10 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+}
+
+.new-button:hover {
+    cursor: pointer;
 }
 
 #plus-icon {
@@ -282,6 +320,10 @@
     font-size: 16px;
 }
 
+.create-notebook-button:hover {
+    cursor: pointer;
+}
+
 .create-note-button {
     width: 95%;
     height: 35px;
@@ -291,6 +333,10 @@
     border-radius: 5px;
     color: white;
     font-size: 16px;
+}
+
+.create-note-button:hover {
+    cursor: pointer;
 }
 
 .notebooks-dropdown-lists {

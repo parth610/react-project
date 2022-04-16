@@ -18,7 +18,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
+    background-color: #a2ffbb;
 }
 
 .login-form-container {
